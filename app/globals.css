@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+ * Palette noir & blanc.
+ * Les anciens noms (cream, sand, gold, terra, indigo) sont gardés comme alias
+ * pour pouvoir réintroduire une couleur de marque plus tard en un seul endroit.
+ */
+@theme inline {
+  --color-ink: #0d0d0d;
+  --color-ink-soft: #2a2a2a;
+  --color-paper: #ffffff;
+  --color-mist: #ffffff;
+  --color-line: #e6e6e6;
+
+  --color-cream: #ffffff;
+  --color-sand: #ffffff;
+  --color-gold: #0d0d0d;
+  --color-terra: #0d0d0d;
+  --color-indigo: #0d0d0d;
+
+  --font-sans: "DM Sans Variable", system-ui, sans-serif;
+  --font-display: "DM Sans Variable", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Titre de section : majuscules + petit trait dessous */
+.section-title {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.15;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 0.6rem;
+  background: currentColor;
+}
+
+/* Lien texte souligné */
+.text-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.15s;
+}
+.text-link:hover {
+  opacity: 0.6;
+}
+
+/* Boutons carrés */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  border: 2px solid currentColor;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-dark {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: #fff;
+}
+.btn-dark:hover {
+  background: transparent;
+  color: var(--color-ink);
+}
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+.btn-outline:hover {
+  background: var(--color-ink);
+  color: #fff;
+}
+.btn-light {
+  background: #fff;
+  border-color: #fff;
+  color: var(--color-ink);
+}
+.btn-light:hover {
+  background: transparent;
+  color: #fff;
+}
+.btn-ghost-light {
+  background: transparent;
+  border-color: rgb(255 255 255 / 0.5);
+  color: #fff;
+}
+.btn-ghost-light:hover {
+  border-color: #fff;
+}
+
+/* Carte produit : bord fin, légère élévation au survol */
+.product-card {
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.product-card:hover {
+  box-shadow: 0 10px 26px rgb(0 0 0 / 0.12);
+  transform: translateY(-2px);
+}
+
+/* Texte doré métallique, teintes relevées sur le logo */
+.text-gold-metal {
+  background: linear-gradient(180deg, #f6e7a6 0%, #e0cf9b 40%, #c9a85c 62%, #f3e0a0 85%, #b8913f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Carrousel du hero : zoom lent */
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+.hero-zoom {
+  animation: hero-zoom 7s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
