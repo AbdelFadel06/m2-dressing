@@ -1,0 +1,16 @@
+{
+  "name": "m2-dressing-studio",
+  "private": true,
+  "description": "Espace de saisie du styliste (Sanity Studio). Installé à part pour garder le site léger.",
+  "scripts": {
+    "dev": "sanity dev",
+    "deploy": "sanity deploy",
+    "import": "sanity exec scripts/import-sanity.ts --with-user-token"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sanity": "^5.29.0",
+    "styled-components": "^6.1.0"
+  }
+}

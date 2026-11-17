@@ -5,8 +5,8 @@
  */
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { schemaTypes } from "./sanity/schemaTypes";
-import { dataset, projectId } from "./sanity/env";
+import { schemaTypes } from "./schemaTypes";
+import { dataset, projectId } from "../sanity/env";
 
 const SINGLETON = "accueil";
 

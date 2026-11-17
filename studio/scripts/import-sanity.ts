@@ -2,6 +2,7 @@
  * Importe les contenus actuels du code (créations, tissus, carrousel + photos) dans Sanity.
  * À lancer une seule fois, après `npx sanity login` :
  *
+ *   cd studio
  *   npx sanity exec scripts/import-sanity.ts --with-user-token
  *
  * Relancer le script met à jour les mêmes fiches (pas de doublons).
@@ -9,8 +10,8 @@
 import { createReadStream, existsSync } from "node:fs";
 import { basename, join } from "node:path";
 import { getCliClient } from "sanity/cli";
-import { fabrics, models } from "../lib/products";
-import { site } from "../lib/site";
+import { fabrics, models } from "../../lib/products";
+import { site } from "../../lib/site";
 
 const client = getCliClient({ apiVersion: "2025-01-01" });
 const uploaded = new Map<string, string>();
@@ -24,7 +25,7 @@ function hotspot(position?: string) {
 
 async function image(path?: string, position?: string) {
   if (!path) return undefined;
-  const file = join(process.cwd(), "public", path);
+  const file = join(process.cwd(), "..", "public", path);
   if (!existsSync(file)) return undefined;
   if (!uploaded.has(path)) {
     const asset = await client.assets.upload("image", createReadStream(file), { filename: basename(file) });

@@ -6,7 +6,7 @@
  * Tant qu'une liste est vide dans Sanity, on garde les exemples du code (lib/products.ts, lib/site.ts),
  * pour que le site ne soit jamais vide pendant la mise en place.
  */
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { fabrics as localFabrics, models as localModels, type Fabric, type Model } from "./products";
@@ -42,7 +42,6 @@ type FabricRow = Pick<Fabric, "id" | "name" | "type" | "price" | "unit" | "tag">
 const mono: Model["colors"] = ["#0d0d0d", "#5a5a5a", "#d9d9d9"];
 
 export async function getModels(): Promise<Model[]> {
-  "use cache";
   return fetchOr(
     `*[_type == "creation" && defined(slug.current)] | order(_createdAt desc) {
       "id": slug.current, "name": nom, "category": categorie, "price": coalesce(prix, 0),
@@ -54,7 +53,6 @@ export async function getModels(): Promise<Model[]> {
 }
 
 export async function getFabrics(): Promise<Fabric[]> {
-  "use cache";
   return fetchOr(
     `*[_type == "tissu" && defined(slug.current)] | order(_createdAt desc) {
       "id": slug.current, "name": nom, type, "price": coalesce(prix, 0), "unit": coalesce(unite, ""), photo, "tag": etiquette
@@ -67,7 +65,6 @@ export async function getFabrics(): Promise<Fabric[]> {
 export type HeroSlide = { image: string; alt: string; position?: string };
 
 export async function getHeroSlides(): Promise<HeroSlide[]> {
-  "use cache";
   return fetchOr(
     `*[_id == "accueil"][0].carrousel[defined(asset)]`,
     site.heroSlides,
