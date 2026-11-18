@@ -191,3 +191,39 @@ body {
     transform: none;
   }
 }
+
+/* Page 404 « Fil perdu » : le fil se coud de gauche à droite, puis le nœud apparaît */
+.thread {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sew 2.4s cubic-bezier(0.45, 0.05, 0.3, 1) 0.2s forwards;
+}
+.thread-knot {
+  opacity: 0;
+  animation: knot 0.4s ease-out 2.5s forwards;
+}
+.thread-stitch {
+  opacity: 0;
+  animation: stitch 0.9s ease-out 2.6s forwards;
+}
+@keyframes stitch {
+  to { opacity: 0.75; }
+}
+@keyframes sew {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes knot {
+  from { opacity: 0; transform: scale(0.3); }
+  to { opacity: 1; transform: scale(1); }
+}
+.thread-knot { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) {
+  .thread { animation: none; stroke-dashoffset: 0; }
+  .thread-knot { animation: none; opacity: 1; }
+  .thread-stitch { animation: none; opacity: 0.75; }
+}
+/* Sur téléphone le dessin est réduit de moitié : on épaissit le trait pour garder la même finesse à l'écran */
+@media (max-width: 640px) {
+  .thread { stroke-width: 3.2px; }
+  .thread-stitch { stroke-width: 2px; }
+}
