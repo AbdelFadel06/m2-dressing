@@ -9,11 +9,16 @@
  */
 import { createReadStream, existsSync } from "node:fs";
 import { basename, join } from "node:path";
-import { getCliClient } from "sanity/cli";
+import { createClient } from "@sanity/client";
+import { apiVersion, dataset, projectId } from "../../sanity/env";
 import { fabrics, models } from "../../lib/products";
 import { site } from "../../lib/site";
 
-const client = getCliClient({ apiVersion: "2025-01-01" });
+// Votre connexion (`npx sanity login`) est transmise par `--with-user-token` dans SANITY_AUTH_TOKEN.
+// (getCliClient() de sanity 5.31 plante à cause d'un mauvais chemin interne vers tsx, d'où ce client fait main.)
+const token = process.env.SANITY_AUTH_TOKEN;
+if (!token) throw new Error("Lancez d'abord `npx sanity login`, puis `npm run import`.");
+const client = createClient({ projectId, dataset, apiVersion, token, useCdn: false });
 const uploaded = new Map<string, string>();
 
 /** "center 20%" → point important { x: 0.5, y: 0.2 } */
