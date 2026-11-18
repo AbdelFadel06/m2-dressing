@@ -44,3 +44,6 @@ next-env.d.ts
 .sanity/
 /dist/
 /studio/node_modules
+
+# vidéos originales (lourdes), non versionnées
+/videos-source/

@@ -14,11 +14,17 @@ export function LoopVideo({
   poster,
   label,
   className = "",
+  threshold = 0.25,
+  preload = "auto",
 }: {
   src: string;
   poster?: string;
   label: string;
   className?: string;
+  /** Part de la vidéo qui doit être visible pour qu'elle joue (0 à 1). */
+  threshold?: number;
+  /** « metadata » : ne télécharge la vidéo qu'au moment de la jouer (carrousels). */
+  preload?: "auto" | "metadata";
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -29,21 +35,31 @@ export function LoopVideo({
     video.muted = true;
     video.defaultMuted = true;
 
+    let visible = false;
+    const tryPlay = () => {
+      if (visible && video.paused) {
+        video.play().catch(() => {
+          /* lecture auto bloquée (mode économie d'énergie) : le poster reste affiché */
+        });
+      }
+    };
+    // si la vidéo n'était pas encore chargée au moment où elle est devenue visible, on relance dès qu'elle est prête
+    video.addEventListener("canplay", tryPlay);
+
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {
-            /* lecture auto bloquée (mode économie d'énergie) : le poster reste affiché */
-          });
-        } else {
-          video.pause();
-        }
+        visible = entry.isIntersecting;
+        if (visible) tryPlay();
+        else video.pause();
       },
-      { threshold: 0.25 },
+      { threshold },
     );
     io.observe(video);
-    return () => io.disconnect();
-  }, []);
+    return () => {
+      io.disconnect();
+      video.removeEventListener("canplay", tryPlay);
+    };
+  }, [threshold]);
 
   return (
     <video
@@ -51,10 +67,10 @@ export function LoopVideo({
       src={src}
       poster={poster}
       muted
-      autoPlay
+      autoPlay={preload === "auto"}
       loop
       playsInline
-      preload="auto"
+      preload={preload}
       aria-label={label}
       className={`absolute inset-0 h-full w-full object-cover object-top ${className}`}
     />

@@ -13,8 +13,8 @@ npm run build    # vérification avant mise en ligne
 ## Ce qu'il faut personnaliser (dans l'ordre)
 
 1. **`lib/site.ts`** : numéro WhatsApp (`whatsapp`, format `22997000000`), lien TikTok, adresses des 2 ateliers, horaires.
-2. **Vidéos TikTok** : dans `lib/site.ts` → `tiktok.videoIds`, ajoutez 1 ou 2 IDs de vidéos
-   (le nombre à la fin du lien `.../video/7312345678901234567`).
+2. **Vidéos TikTok** (carrousel) : clips MP4 dans `public/videos/tiktok/`, aperçus dans `public/images/tiktok/`,
+   et la liste (fichier, titre, lien de la vidéo TikTok) dans `lib/site.ts` → `tiktok.clips`.
 3. **`lib/products.ts`** : remplacez les créations et pagnes d'exemple (noms, prix, catégories).
 4. **Photos** : déposez les images dans `public/images/` et ajoutez `image: "/images/nom.jpg"`
    sur l'article. Sans `image`, un motif de pagne est affiché.
@@ -61,5 +61,3 @@ créations dès que possible.
   et pour les créations Femme, Enfant et Famille : 34625881, 11048042, 35714343, 29607147,
   31838344, 19275028
   (voir `https://www.pexels.com/photo/<numéro>/`).
-- Vidéo `public/videos/atelier-couture.mp4` : [Mixkit](https://mixkit.co/license/#videoFree),
-  vidéo n° 34239 « Man sewing a garment on a sewing machine », recadrée en vertical.

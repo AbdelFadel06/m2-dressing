@@ -4,6 +4,8 @@
  *  Modifiez uniquement ce fichier pour changer les infos de base.
  * ============================================================
  */
+export type TikTokClip = { src: string; poster: string; label: string; url: string };
+
 export const site = {
   name: "M2 Dressing",
   /**
@@ -36,21 +38,15 @@ export const site = {
     handle: "@m2dressing",
     url: "https://www.tiktok.com/@m2dressing",
     /**
-     * Une seule vidéo est affichée (la première de la liste).
-     * OPTION 1 (recommandée) : votre vidéo en fichier MP4, dans /public/videos/.
-     * Lecture automatique, en boucle et sans son garantie sur tous les navigateurs.
-     * Ex: { src: "/videos/tiktok-1.mp4", poster: "/images/agbada-ivoire-brode.jpg" }
+     * Carrousel de la section vidéo : chaque clip joue sans son, en boucle, et renvoie vers sa vidéo TikTok.
+     * Fichiers dans /public/videos/tiktok/ (MP4 H.264, ~14 s, ~3,5 Mo) et aperçus dans /public/images/tiktok/.
      */
-    localVideos: [
-      { src: "/videos/atelier-couture.mp4", poster: "/images/stock/atelier-couture-poster.jpg" },
-    ] as { src: string; poster?: string }[],
-    /**
-     * OPTION 2 : identifiant d'une vidéo TikTok, lue par le lecteur TikTok
-     * en automatique, en boucle et sans son. L'ID est le nombre à la fin du lien :
-     * https://www.tiktok.com/@m2dressing/video/7312345678901234567  →  "7312345678901234567"
-     * Si les deux listes sont vides, une carte qui renvoie vers TikTok est affichée.
-     */
-    videoIds: [] as string[],
+    clips: [
+      { src: "/videos/tiktok/jaune.mp4", poster: "/images/tiktok/jaune.jpg", label: "Ensemble jaune brodé", url: "https://www.tiktok.com/@m2dressing/video/7706176539657899284" },
+      { src: "/videos/tiktok/bleu.mp4", poster: "/images/tiktok/bleu.jpg", label: "Agbada bleu canard", url: "https://www.tiktok.com/@m2dressing/video/7694339658506980628" },
+      { src: "/videos/tiktok/noir.mp4", poster: "/images/tiktok/noir.jpg", label: "Grand boubou noir brodé", url: "https://www.tiktok.com/@m2dressing/video/7693994173313109269" },
+      { src: "/videos/tiktok/veste.mp4", poster: "/images/tiktok/veste.jpg", label: "Veste beige", url: "https://www.tiktok.com/@m2dressing/video/7689862594634452244" },
+    ] as TikTokClip[],
   },
 
   /** Les deux ateliers à Parakou */

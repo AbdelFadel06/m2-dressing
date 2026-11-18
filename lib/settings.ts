@@ -3,7 +3,7 @@
  * (fiche « Réglages du site »). Les valeurs de lib/site.ts servent de repli.
  * Ce fichier ne contient que des types et des fonctions pures : utilisable côté serveur et navigateur.
  */
-import { site } from "./site";
+import { site, type TikTokClip } from "./site";
 
 export type Workshop = {
   name: string;
@@ -21,7 +21,7 @@ export type Settings = {
   whatsapp: string;
   phoneDisplay: string;
   email?: string;
-  tiktok: { url: string; handle: string; localVideos: { src: string; poster?: string }[]; videoIds: string[] };
+  tiktok: { url: string; handle: string; clips: TikTokClip[] };
   facebook?: string;
   instagram?: string;
   workshops: Workshop[];
