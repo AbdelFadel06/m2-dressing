@@ -26,8 +26,10 @@ export type Model = {
   id: string;
   name: string;
   category: ModelCategory;
-  /** Prix "à partir de" (façon), en FCFA */
+  /** Prix « tout fourni » : tissu + couture, en FCFA */
   price: number;
+  /** Prix « mon tissu » : couture seule, le client apporte son tissu, en FCFA */
+  priceOwnFabric: number;
   description: string;
   pattern: PatternKey;
   colors: Colors;
@@ -73,6 +75,7 @@ export const models: Model[] = [
     name: "Agbada bleu nuit brodé",
     category: "Homme",
     price: 60000,
+    priceOwnFabric: 35000, // exemple, à ajuster
     description: "Grand agbada trois pièces, arabesques brodées en blanc sur le plastron.",
     pattern: "diamonds",
     colors: ["#1c2757", "#f0e5d0", "#0d0d0d"],
@@ -84,6 +87,7 @@ export const models: Model[] = [
     name: "Agbada aso-oke indigo",
     category: "Homme",
     price: 75000,
+    priceOwnFabric: 40000, // exemple, à ajuster
     description: "Aso-oke tissé à rayures indigo et fuchsia, porté avec sa toque assortie.",
     pattern: "stripes",
     colors: ["#2a2f7a", "#c2357e", "#f0e5d0"],
@@ -95,6 +99,7 @@ export const models: Model[] = [
     name: "Agbada bordeaux",
     category: "Homme",
     price: 55000,
+    priceOwnFabric: 30000, // exemple, à ajuster
     description: "Agbada ample bordeaux, broderie dorée au col et au plastron.",
     pattern: "circles",
     colors: ["#5a1420", "#c9a46a", "#0d0d0d"],
@@ -105,6 +110,7 @@ export const models: Model[] = [
     name: "Agbada gris brodé",
     category: "Homme",
     price: 50000,
+    priceOwnFabric: 30000, // exemple, à ajuster
     description: "Gris anthracite, plastron brodé de motifs géométriques verts et blancs.",
     pattern: "squares",
     colors: ["#4a4d55", "#2e7d5b", "#f0e5d0"],
@@ -116,6 +122,7 @@ export const models: Model[] = [
     name: "Agbada blanc brodé",
     category: "Homme",
     price: 55000,
+    priceOwnFabric: 30000, // exemple, à ajuster
     description: "Blanc immaculé, broderies géométriques bordeaux sur le devant.",
     pattern: "diamonds",
     colors: ["#f5f5f5", "#7a2030", "#c9c9c9"],
@@ -126,6 +133,7 @@ export const models: Model[] = [
     name: "Agbada aso-oke chocolat",
     category: "Homme",
     price: 65000,
+    priceOwnFabric: 35000, // exemple, à ajuster
     description: "Aso-oke brun chocolat à rayures, chemise blanche et toque assortie.",
     pattern: "stripes",
     colors: ["#4a2a1a", "#c9a46a", "#f0e5d0"],
@@ -137,6 +145,7 @@ export const models: Model[] = [
     name: "Agbada bleu ciel",
     category: "Homme",
     price: 50000,
+    priceOwnFabric: 30000, // exemple, à ajuster
     description: "Bazin bleu ciel, broderie ton sur ton, pour mariages et baptêmes.",
     pattern: "waves",
     colors: ["#7fa8d9", "#cfe0f3", "#1c2757"],
@@ -147,6 +156,7 @@ export const models: Model[] = [
     name: "Agbada turquoise",
     category: "Homme",
     price: 50000,
+    priceOwnFabric: 30000, // exemple, à ajuster
     description: "Bazin turquoise brillant, coupe ample et finitions brodées.",
     pattern: "waves",
     colors: ["#1aa0b8", "#a8e3ec", "#0d0d0d"],
@@ -157,6 +167,7 @@ export const models: Model[] = [
     name: "Agbada ivoire en dentelle",
     category: "Homme",
     price: 70000,
+    priceOwnFabric: 40000, // exemple, à ajuster
     description: "Dentelle ivoire légère sur fond uni, pour les grandes cérémonies.",
     pattern: "leaves",
     colors: ["#f0e5d0", "#c9b48a", "#8a7a5a"],
@@ -167,6 +178,7 @@ export const models: Model[] = [
     name: "Agbada blanc et violet",
     category: "Homme",
     price: 55000,
+    priceOwnFabric: 30000, // exemple, à ajuster
     description: "Blanc et gris perle, broderie violette du col jusqu'aux pans.",
     pattern: "squares",
     colors: ["#ececec", "#6b3f8a", "#9a9a9a"],
@@ -177,6 +189,7 @@ export const models: Model[] = [
     name: "Agbada aso-oke vert",
     category: "Homme",
     price: 65000,
+    priceOwnFabric: 35000, // exemple, à ajuster
     description: "Aso-oke vert profond rayé de blanc, toque brodée assortie.",
     pattern: "stripes",
     colors: ["#0f5d4a", "#f0e5d0", "#0d0d0d"],
@@ -189,6 +202,7 @@ export const models: Model[] = [
     name: "Couple cérémonie or",
     category: "Couple & Famille",
     price: 150000,
+    priceOwnFabric: 80000, // exemple, à ajuster
     description: "Agbada brodé pour lui, robe en dentelle perlée pour elle, accordés en tons dorés.",
     pattern: "leaves",
     colors: ["#c9a46a", "#f0e5d0", "#5a4320"],
@@ -200,6 +214,7 @@ export const models: Model[] = [
     name: "Couple aso-oke vert",
     category: "Couple & Famille",
     price: 90000,
+    priceOwnFabric: 50000, // exemple, à ajuster
     description: "Tissu tissé rayé vert et or : agbada pour lui, ensemble et châle pour elle.",
     pattern: "stripes",
     colors: ["#0f5d4a", "#c9a46a", "#8a8a8a"],
@@ -210,6 +225,7 @@ export const models: Model[] = [
     name: "Tenue famille Good Luck",
     category: "Couple & Famille",
     price: 40000,
+    priceOwnFabric: 20000, // exemple, à ajuster
     description: "Plusieurs tenues coordonnées pour toute la famille (devis selon nombre).",
     pattern: "diamonds",
     colors: ["#0f5d4a", "#c58b2b", "#faf4e8"],
@@ -221,6 +237,7 @@ export const models: Model[] = [
     name: "Robe Kaba Élégance",
     category: "Femme",
     price: 15000,
+    priceOwnFabric: 10000, // exemple, à ajuster
     description: "Kaba cintré, coupe soignée, idéal pour cérémonies et mariages.",
     pattern: "circles",
     colors: ["#1c2757", "#c58b2b", "#faf4e8"],
@@ -230,6 +247,7 @@ export const models: Model[] = [
     name: "Ensemble pagne 2 pièces",
     category: "Femme",
     price: 18000,
+    priceOwnFabric: 10000, // exemple, à ajuster
     description: "Haut ajusté et jupe assortie, finitions propres.",
     pattern: "diamonds",
     colors: ["#b4432b", "#f0b84a", "#17120f"],
@@ -239,6 +257,7 @@ export const models: Model[] = [
     name: "Robe sirène wax",
     category: "Femme",
     price: 20000,
+    priceOwnFabric: 10000, // exemple, à ajuster
     description: "Coupe sirène qui épouse la silhouette, évasée en bas.",
     pattern: "waves",
     colors: ["#0f5d4a", "#f3d98b", "#faf4e8"],
@@ -248,6 +267,7 @@ export const models: Model[] = [
     name: "Boubou femme brodé",
     category: "Femme",
     price: 25000,
+    priceOwnFabric: 15000, // exemple, à ajuster
     description: "Grand boubou ample avec broderies à la main.",
     pattern: "leaves",
     colors: ["#6b2d5c", "#e8b4d0", "#faf4e8"],
@@ -259,6 +279,7 @@ export const models: Model[] = [
     name: "Robe fillette wax",
     category: "Enfant",
     price: 6000,
+    priceOwnFabric: 5000, // exemple, à ajuster
     description: "Robe évasée et confortable pour les petites princesses.",
     pattern: "circles",
     colors: ["#e8742c", "#fbe3a8", "#6b2d5c"],
@@ -268,6 +289,7 @@ export const models: Model[] = [
     name: "Ensemble garçon",
     category: "Enfant",
     price: 7000,
+    priceOwnFabric: 5000, // exemple, à ajuster
     description: "Chemise et short assortis pour fêtes et cérémonies.",
     pattern: "stripes",
     colors: ["#1c2757", "#e8b44a", "#faf4e8"],

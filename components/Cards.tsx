@@ -7,14 +7,19 @@ import { formatPrice, whatsappLink } from "@/lib/site";
 import { Visual } from "./Visual";
 import { WhatsAppIcon } from "./WhatsAppButton";
 
-const sizes = ["Sur mesure", "S", "M", "L", "XL", "XXL"];
+/** Deux formules pour chaque création. */
+const formulas = [
+  { id: "full", label: "Tout fourni", cart: "Tout fourni (tissu + couture)", hint: "Tissu de notre boutique + couture" },
+  { id: "own", label: "Mon tissu", cart: "Mon tissu (couture seule)", hint: "Vous apportez votre tissu, vous ne payez que la couture" },
+] as const;
+type FormulaId = (typeof formulas)[number]["id"];
 
 /*
  * Toutes les cartes partagent la même grille verticale, avec des hauteurs réservées,
  * pour que les éléments restent alignés d'une carte à l'autre quelle que soit
  * la longueur des textes :
  *   catégorie (1 ligne) · titre (2 lignes) · détail (2 lignes) · prix (1 ligne)
- *   puis, collés en bas : choix (40 px) et boutons (40 px).
+ *   puis, collés en bas : choix de la formule (40 px) et boutons (40 px).
  */
 const ui = {
   body: "flex flex-1 flex-col p-3",
@@ -71,16 +76,18 @@ function Actions({ onAdd, added, waHref, waLabel }: { onAdd: () => void; added: 
 }
 
 export function ModelCard({ model }: { model: Model }) {
-  const [size, setSize] = useState(sizes[0]);
+  const [formula, setFormula] = useState<FormulaId>("full");
   const [added, flash] = useAddedFlash();
+  const current = formulas.find((f) => f.id === formula)!;
+  const price = formula === "full" ? model.price : model.priceOwnFabric;
 
   const add = () => {
     cartActions.add({
       kind: "model",
       id: model.id,
       name: model.name,
-      unitPrice: model.price,
-      option: size,
+      unitPrice: price,
+      option: current.cart,
       pattern: model.pattern,
       colors: model.colors,
       image: model.image,
@@ -98,24 +105,30 @@ export function ModelCard({ model }: { model: Model }) {
         <p className={ui.eyebrow}>{model.category}</p>
         <h3 className={ui.title} title={model.name}>{model.name}</h3>
         <p className={`${ui.detail} hidden md:block`}>{model.description}</p>
-        <p className={ui.price}>
-          <span className="text-ink/50"><span className="sm:hidden">Dès </span><span className="hidden sm:inline">À partir de </span></span>
-          <span className="font-bold">{formatPrice(model.price)}</span>
-        </p>
+        <p className={`${ui.price} font-bold`} aria-live="polite">{formatPrice(price)}</p>
 
         <div className={ui.bottom}>
-          <label className="sr-only" htmlFor={`size-${model.id}`}>Taille</label>
-          <select id={`size-${model.id}`} value={size} onChange={(e) => setSize(e.target.value)} className={`${ui.control} px-2`}>
-            {sizes.map((s) => (
-              <option key={s} value={s}>
-                {s === "Sur mesure" ? "Sur mesure" : `Taille ${s}`}
-              </option>
+          <div className={`${ui.control} grid grid-cols-2 p-0.5`} role="radiogroup" aria-label="Formule">
+            {formulas.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                role="radio"
+                aria-checked={formula === f.id}
+                title={f.hint}
+                onClick={() => setFormula(f.id)}
+                className={`truncate px-1 text-xs font-semibold transition-colors ${
+                  formula === f.id ? "bg-ink text-white" : "text-ink/60 hover:text-ink"
+                }`}
+              >
+                {f.label}
+              </button>
             ))}
-          </select>
+          </div>
           <Actions
             onAdd={add}
             added={added}
-            waHref={whatsappLink(`Bonjour M2 Dressing, je suis intéressé(e) par la création « ${model.name} » (${model.category}). Pouvez-vous me donner plus d'infos ?`)}
+            waHref={whatsappLink(`Bonjour M2 Dressing, je suis intéressé(e) par la création « ${model.name} » (${model.category}), formule « ${current.cart} » à ${formatPrice(price)}. Pouvez-vous me donner plus d'infos ?`)}
             waLabel={`Demander « ${model.name} » sur WhatsApp`}
           />
         </div>

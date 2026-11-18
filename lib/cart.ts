@@ -16,7 +16,7 @@ export type CartLine = {
   name: string;
   unitPrice: number;
   qty: number;
-  option?: string; // taille, unité de vente...
+  option?: string; // formule (créations), unité de vente (tissus)
   pattern: PatternKey;
   colors: Colors;
   image?: string;

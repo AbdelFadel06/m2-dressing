@@ -45,7 +45,7 @@ export function CartView() {
     const items = lines
       .map(
         (l, i) =>
-          `${i + 1}. ${l.name}${l.option ? ` — ${l.kind === "model" ? "Taille" : ""} ${l.option}`.trimEnd() : ""} × ${l.qty} = ${formatPrice(l.qty * l.unitPrice)}`,
+          `${i + 1}. ${l.name}${l.option ? ` — ${l.option}` : ""} × ${l.qty} = ${formatPrice(l.qty * l.unitPrice)}`,
       )
       .join("\n");
     return [
@@ -88,7 +88,7 @@ export function CartView() {
                 <div className="min-w-0">
                   <p className="text-sm font-semibold leading-snug">{l.name}</p>
                   <p className="text-xs text-ink/50">
-                    {l.kind === "model" ? `Taille : ${l.option}` : l.option}
+                    {l.kind === "model" ? `Formule : ${l.option}` : l.option}
                   </p>
                 </div>
                 <button onClick={() => cartActions.remove(l.key)} className="text-xs text-ink/50 underline hover:text-ink">

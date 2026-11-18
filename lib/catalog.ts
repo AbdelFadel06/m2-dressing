@@ -36,7 +36,7 @@ async function fetchOr<T>(query: string, fallback: T[], map: (row: never) => T):
   }
 }
 
-type ModelRow = Pick<Model, "id" | "name" | "category" | "price" | "description" | "video" | "tag"> & { photo?: SanityImage };
+type ModelRow = Pick<Model, "id" | "name" | "category" | "price" | "priceOwnFabric" | "description" | "video" | "tag"> & { photo?: SanityImage };
 type FabricRow = Pick<Fabric, "id" | "name" | "type" | "price" | "unit" | "tag"> & { photo?: SanityImage };
 
 const mono: Model["colors"] = ["#0d0d0d", "#5a5a5a", "#d9d9d9"];
@@ -44,7 +44,7 @@ const mono: Model["colors"] = ["#0d0d0d", "#5a5a5a", "#d9d9d9"];
 export async function getModels(): Promise<Model[]> {
   return fetchOr(
     `*[_type == "creation" && defined(slug.current)] | order(_createdAt desc) {
-      "id": slug.current, "name": nom, "category": categorie, "price": coalesce(prix, 0),
+      "id": slug.current, "name": nom, "category": categorie, "price": coalesce(prix, 0), "priceOwnFabric": coalesce(prixCouture, prix, 0),
       "description": coalesce(description, ""), photo, "video": video.asset->url, "tag": etiquette
     }`,
     localModels,

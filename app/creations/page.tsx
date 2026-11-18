@@ -14,8 +14,9 @@ export default async function CreationsPage() {
     <div className="mx-auto max-w-6xl px-4 pb-12 pt-28">
       <h1 className="section-title">Nos créations</h1>
       <p className="mt-4 max-w-2xl text-ink/60">
-        Choisissez une création et sa taille, ajoutez-la au panier puis envoyez votre commande sur WhatsApp.
-        Les prix sont « à partir de » (façon) et le prix final est confirmé selon le tissu et vos mesures.
+        Choisissez une création et sa formule, ajoutez-la au panier puis envoyez votre commande sur WhatsApp.
+        « Tout fourni » : nous fournissons le tissu et la couture. « Mon tissu » : vous apportez votre tissu
+        et ne payez que la couture. Vos mesures sont prises à l&apos;atelier ou à distance.
       </p>
       <div className="mt-8">
         <Suspense fallback={<ModelsCatalogStatic models={models} />}>

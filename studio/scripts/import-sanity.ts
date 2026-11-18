@@ -49,6 +49,7 @@ async function run() {
       slug: { _type: "slug", current: m.id },
       categorie: m.category,
       prix: m.price,
+      prixCouture: m.priceOwnFabric,
       description: m.description,
       photo: await image(m.image),
       etiquette: m.tag,

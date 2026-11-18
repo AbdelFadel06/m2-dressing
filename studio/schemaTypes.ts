@@ -45,7 +45,15 @@ export const creation = defineType({
     }),
     defineField({
       name: "prix",
-      title: "Prix « à partir de » (FCFA)",
+      title: "Prix « Tout fourni » (FCFA)",
+      description: "Tissu fourni par M2 Dressing + couture.",
+      type: "number",
+      validation: (r) => r.required().min(0),
+    }),
+    defineField({
+      name: "prixCouture",
+      title: "Prix « Mon tissu » (FCFA)",
+      description: "Le client apporte son tissu : couture seule.",
       type: "number",
       validation: (r) => r.required().min(0),
     }),
