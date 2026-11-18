@@ -50,5 +50,6 @@ export const defaultSettings: Settings = {
   whatsapp: site.whatsapp,
   phoneDisplay: site.phoneDisplay,
   tiktok: site.tiktok,
+  facebook: site.facebook,
   workshops: site.workshops,
 };

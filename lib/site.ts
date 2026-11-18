@@ -56,10 +56,11 @@ export const site = {
   /** Les deux ateliers à Parakou */
   workshops: [
     {
-      name: "Atelier 1",
-      area: "Parakou — quartier à renseigner",
+      name: "Boutique Wansirou",
+      area: "Quartier Wansirou, Parakou",
+      address: "Juste en face de l'arrêt de bus 3STV",
       hours: "Lun – Sam · 8h – 19h",
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=Parakou+Benin",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Wansirou%20arr%C3%AAt%203STV%20Parakou%20B%C3%A9nin",
     },
     {
       name: "Atelier 2",
@@ -68,6 +69,8 @@ export const site = {
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Parakou+Benin",
     },
   ],
+
+  facebook: "https://www.facebook.com/share/1E4Yd68qU9/",
 
   currency: "FCFA",
 };
