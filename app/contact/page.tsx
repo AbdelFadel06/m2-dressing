@@ -5,8 +5,10 @@ import { getSettings } from "@/lib/catalog";
 import { whatsappLink } from "@/lib/settings";
 
 export const metadata: Metadata = {
-  title: "Ateliers & Contact",
-  description: "Les deux ateliers M2 Dressing à Parakou : adresses, horaires, WhatsApp et TikTok.",
+  title: "Atelier de couture à Parakou : adresses et contact",
+  description:
+    "Les deux ateliers de couture M2 Dressing à Parakou (Bénin) : adresses, horaires, itinéraire, WhatsApp. Prise de mesures sur place ou à distance.",
+  alternates: { canonical: "/contact" },
 };
 
 export default async function ContactPage() {

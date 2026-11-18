@@ -84,6 +84,24 @@ async function run() {
   }
   await client.createOrReplace({ _id: "accueil", _type: "accueil", carrousel });
 
+  console.log("Réglages du site…");
+  // createIfNotExists : ne remplace jamais des réglages déjà saisis par le styliste
+  await client.createIfNotExists({
+    _id: "reglages",
+    _type: "reglages",
+    slogan: site.tagline,
+    whatsapp: site.whatsapp,
+    tiktok: site.tiktok.url,
+    ateliers: site.workshops.map((w, i) => ({
+      _key: `atelier${i}`,
+      _type: "atelier",
+      nom: w.name,
+      quartier: w.area,
+      horaires: w.hours,
+      lienMaps: w.mapUrl,
+    })),
+  });
+
   console.log(`Terminé : ${models.length} créations, ${fabrics.length} tissus, ${carrousel.length} images de carrousel.`);
 }
 

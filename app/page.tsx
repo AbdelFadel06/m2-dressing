@@ -8,6 +8,7 @@ import { Pattern } from "@/components/Visual";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
 import { getFabrics, getHeroSlides, getModels, getReviews, getSettings, type Review } from "@/lib/catalog";
 import { modelCategories, type PatternKey } from "@/lib/products";
+import { faq, faqJsonLd, JsonLd } from "@/lib/seo";
 import { whatsappLink } from "@/lib/settings";
 import { slugify } from "@/lib/slug";
 
@@ -185,7 +186,7 @@ export default async function Home() {
               <Link href={c.href} className="group relative block aspect-[4/3] overflow-hidden rounded">
                 <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
                   {c.image ? (
-                    <Image src={c.image} alt="" fill sizes="(min-width: 768px) 33vw, 50vw" style={{ objectPosition: c.position ?? "center 20%" }} className="object-cover" />
+                    <Image src={c.image} alt={`Tenues ${c.label} — M2 Dressing Parakou`} fill sizes="(min-width: 768px) 33vw, 50vw" style={{ objectPosition: c.position ?? "center 20%" }} className="object-cover" />
                   ) : (
                     <Pattern pattern={c.pattern} colors={mono} uid={`cat-${c.pattern}`} />
                   )}
@@ -278,10 +279,27 @@ export default async function Home() {
       {/* 8. AVIS CLIENTS : affichés seulement quand de vrais avis sont saisis dans Sanity */}
       {reviews.length > 0 && <Reviews reviews={reviews} />}
 
-      {/* 9. VIDÉO */}
+      {/* 9. QUESTIONS FRÉQUENTES (aussi lues par Google et les IA) */}
+      <section className="mx-auto max-w-3xl px-4 pb-16 md:pb-24">
+        <JsonLd data={faqJsonLd(site)} />
+        <SectionHead eyebrow="Styliste et tailleur à Parakou" title="Questions fréquentes" />
+        <div className="mt-8 divide-y divide-line border-y border-line">
+          {faq(site).map(({ q, a }) => (
+            <details key={q} className="group py-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
+                {q}
+                <span className="text-xl leading-none text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p className="mt-3 leading-relaxed text-ink/70">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* 10. VIDÉO */}
       <TikTokSection settings={site} />
 
-      {/* 10. CONTACT */}
+      {/* 11. CONTACT */}
       <section className="border-b border-white/10 bg-ink text-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-[1.1fr_1fr] md:py-20">
           <Reveal>

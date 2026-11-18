@@ -13,7 +13,7 @@ export const site = {
   url: (process.env.SITE_URL ?? "https://m2-dressing.pages.dev").replace(/\/$/, ""),
   tagline: "L'élégance et la noblesse. Couture sur mesure à Parakou.",
   description:
-    "M2 Dressing, styliste à Parakou (Bénin) : couture sur mesure, tenues de cérémonie, Good Luck, wax, bazin et dentelle. Commandez par WhatsApp.",
+    "M2 Dressing, styliste et tailleur à Parakou (Bénin) : couture sur mesure homme, femme et enfant, tenues traditionnelles (agbada, boubou brodé, aso-oke), tenues de mariage et de cérémonie. Vente de pagnes Good Luck, wax, bazin et dentelle. Commande sur WhatsApp.",
 
   /** Numéro WhatsApp au format international, SANS le "+" ni espaces (ex: 22997000000) */
   whatsapp: "2290194381496",

@@ -47,7 +47,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carrousel"
       aria-label="Nos créations"
     >
-      <h1 className="sr-only">{site.name}, couture sur mesure à Parakou</h1>
+      <h1 className="sr-only">{site.name} — styliste et tailleur à Parakou (Bénin), couture sur mesure homme, femme et enfant</h1>
 
       {slides.map((s, i) => (
         <div
