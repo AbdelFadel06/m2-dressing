@@ -222,6 +222,7 @@ export const models: Model[] = [
   },
   {
     id: "tenue-famille-good-luck",
+    image: "/images/stock/tenue-famille-good-luck.jpg",
     name: "Tenue famille Good Luck",
     category: "Couple & Famille",
     price: 40000,
@@ -234,6 +235,7 @@ export const models: Model[] = [
   // ---- Femme ---- (exemples sans photo : ajoutez image: "/images/....jpg")
   {
     id: "robe-kaba-elegance",
+    image: "/images/stock/robe-kaba-elegance.jpg",
     name: "Robe Kaba Élégance",
     category: "Femme",
     price: 15000,
@@ -244,6 +246,7 @@ export const models: Model[] = [
   },
   {
     id: "ensemble-pagne-2-pieces",
+    image: "/images/stock/ensemble-pagne-2-pieces.jpg",
     name: "Ensemble pagne 2 pièces",
     category: "Femme",
     price: 18000,
@@ -254,6 +257,7 @@ export const models: Model[] = [
   },
   {
     id: "robe-sirene-wax",
+    image: "/images/stock/robe-sirene-wax.jpg",
     name: "Robe sirène wax",
     category: "Femme",
     price: 20000,
@@ -264,6 +268,7 @@ export const models: Model[] = [
   },
   {
     id: "boubou-femme-brode",
+    image: "/images/stock/boubou-femme-brode.jpg",
     name: "Boubou femme brodé",
     category: "Femme",
     price: 25000,
@@ -276,6 +281,7 @@ export const models: Model[] = [
   // ---- Enfant ---- (exemples sans photo)
   {
     id: "robe-fillette-wax",
+    image: "/images/stock/robe-fillette-wax.jpg",
     name: "Robe fillette wax",
     category: "Enfant",
     price: 6000,
@@ -286,6 +292,7 @@ export const models: Model[] = [
   },
   {
     id: "ensemble-garcon",
+    image: "/images/stock/ensemble-garcon.jpg",
     name: "Ensemble garçon",
     category: "Enfant",
     price: 7000,

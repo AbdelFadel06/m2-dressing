@@ -57,7 +57,9 @@ créations dès que possible.
   photos n° 6109557, 34550150, 36445251, 36690235, 37283607, 31485660, 35100573,
   34821107, 37340989, 37331114, 9310866, 39972783, 35677043,
   et pour les tissus et catégories : 30805244, 30971566, 18359544, 30698866, 7629856,
-  7676883, 13049903, 6276042, 19504690, 33968170, 33853777, 37884301
+  7676883, 13049903, 6276042, 19504690, 33968170, 33853777, 37884301,
+  et pour les créations Femme, Enfant et Famille : 34625881, 11048042, 35714343, 29607147,
+  31838344, 19275028
   (voir `https://www.pexels.com/photo/<numéro>/`).
 - Vidéo `public/videos/atelier-couture.mp4` : [Mixkit](https://mixkit.co/license/#videoFree),
   vidéo n° 34239 « Man sewing a garment on a sewing machine », recadrée en vertical.
