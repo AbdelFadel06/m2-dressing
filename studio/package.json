@@ -8,6 +8,7 @@
     "import": "sanity exec scripts/import-sanity.ts --with-user-token"
   },
   "dependencies": {
+    "@sanity/client": "^7.28.0",
     "esbuild": "^0.28.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
