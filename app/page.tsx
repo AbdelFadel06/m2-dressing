@@ -192,7 +192,7 @@ export default async function Home() {
                     <Pattern pattern={c.pattern} colors={mono} uid={`cat-${c.pattern}`} />
                   )}
                 </div>
-                <div className="absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-t from-black/75 via-black/20 to-transparent p-4 text-white">
+                <div className="absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-t from-ink-deep/80 via-ink-deep/20 to-transparent p-4 text-white">
                   <span className="text-base font-bold uppercase tracking-wider md:text-lg">{c.label}</span>
                   <span className="mt-1 text-xs font-medium uppercase tracking-wider text-white/80 group-hover:text-white">Découvrir</span>
                 </div>
@@ -230,7 +230,7 @@ export default async function Home() {
                   <ul className="mt-6 flex-1 space-y-3">
                     {f.points.map((pt) => (
                       <li key={pt} className="flex gap-3">
-                        <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                        <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold-bright" />
                         {pt}
                       </li>
                     ))}

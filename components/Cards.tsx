@@ -36,7 +36,7 @@ const ui = {
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="absolute left-2 top-2 z-10 bg-ink px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+    <span className="absolute left-2 top-2 z-10 bg-terra px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
       {children}
     </span>
   );
