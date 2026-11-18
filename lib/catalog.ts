@@ -11,6 +11,7 @@ import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 import { fabrics as localFabrics, models as localModels, type Fabric, type Model } from "./products";
 import { site } from "./site";
+import { defaultSettings, formatPhone, tiktokHandle, type Settings } from "./settings";
 
 const client = createClient({ projectId, dataset, apiVersion, useCdn: false, perspective: "published" });
 const builder = createImageUrlBuilder({ projectId, dataset });
@@ -86,4 +87,42 @@ export async function getReviews(): Promise<Review[]> {
     [],
     ({ photo: p, ...r }: Review & { photo?: SanityImage }): Review => ({ ...r, ...photo(p) }),
   );
+}
+
+type SettingsRow = {
+  slogan?: string;
+  whatsapp?: string;
+  email?: string;
+  tiktok?: string;
+  facebook?: string;
+  instagram?: string;
+  ateliers?: { nom?: string; quartier?: string; repere?: string; horaires?: string; lienMaps?: string }[];
+};
+
+/** Réglages du site (fiche unique « Réglages du site » dans Sanity), complétés par les valeurs du code. */
+export async function getSettings(): Promise<Settings> {
+  const [r] = await fetchOr(`*[_id == "reglages"][0..0]`, [] as SettingsRow[], (row: SettingsRow) => row);
+  if (!r) return defaultSettings;
+  const whatsapp = r.whatsapp?.replace(/\D/g, "") || defaultSettings.whatsapp;
+  const workshops = (r.ateliers ?? [])
+    .filter((a) => a.nom && a.quartier)
+    .map((a) => ({
+      name: a.nom!,
+      area: a.quartier!,
+      address: a.repere,
+      hours: a.horaires ?? "",
+      mapUrl: a.lienMaps || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${a.quartier} Parakou Bénin`)}`,
+    }));
+  const tiktokUrl = r.tiktok || defaultSettings.tiktok.url;
+  return {
+    ...defaultSettings,
+    tagline: r.slogan || defaultSettings.tagline,
+    whatsapp,
+    phoneDisplay: formatPhone(whatsapp),
+    email: r.email,
+    tiktok: { ...defaultSettings.tiktok, url: tiktokUrl, handle: tiktokHandle(tiktokUrl) },
+    facebook: r.facebook,
+    instagram: r.instagram,
+    workshops: workshops.length ? workshops : defaultSettings.workshops,
+  };
 }

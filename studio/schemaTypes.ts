@@ -168,4 +168,64 @@ export const avis = defineType({
   preview: { select: { title: "prenom", subtitle: "texte", media: "photo" } },
 });
 
-export const schemaTypes = [creation, tissu, avis, accueil];
+export const reglages = defineType({
+  name: "reglages",
+  title: "Réglages du site",
+  type: "document",
+  groups: [
+    { name: "contact", title: "Contact", default: true },
+    { name: "ateliers", title: "Ateliers" },
+    { name: "reseaux", title: "Réseaux sociaux" },
+  ],
+  fields: [
+    defineField({
+      name: "slogan",
+      title: "Slogan",
+      description: "Affiché dans le pied de page. Ex : L'élégance et la noblesse. Couture sur mesure à Parakou.",
+      type: "string",
+      group: "contact",
+    }),
+    defineField({
+      name: "whatsapp",
+      title: "Numéro WhatsApp",
+      description:
+        "Format international, chiffres uniquement, sans + ni espaces. Ex : 2290194381496. Tous les boutons WhatsApp du site l'utilisent.",
+      type: "string",
+      group: "contact",
+      validation: (r) =>
+        r.required().regex(/^\d{8,15}$/, { name: "chiffres" }).error("Uniquement des chiffres, ex : 2290194381496"),
+    }),
+    defineField({ name: "email", title: "E-mail (facultatif)", type: "string", group: "contact" }),
+    defineField({
+      name: "ateliers",
+      title: "Ateliers",
+      type: "array",
+      group: "ateliers",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "atelier",
+          fields: [
+            defineField({ name: "nom", title: "Nom", description: "Ex : Atelier 1, Atelier Zongo…", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "quartier", title: "Quartier", description: "Ex : Parakou — Zongo", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "repere", title: "Repère (facultatif)", description: "Ex : Face à la pharmacie du marché", type: "string" }),
+            defineField({ name: "horaires", title: "Horaires", description: "Ex : Lun – Sam · 8h – 19h", type: "string" }),
+            defineField({
+              name: "lienMaps",
+              title: "Lien Google Maps",
+              description: "Dans Google Maps : ouvrez l'atelier, « Partager », « Copier le lien », puis collez-le ici.",
+              type: "url",
+            }),
+          ],
+          preview: { select: { title: "nom", subtitle: "quartier" } },
+        }),
+      ],
+    }),
+    defineField({ name: "tiktok", title: "Lien TikTok", description: "Ex : https://www.tiktok.com/@m2dressing", type: "url", group: "reseaux" }),
+    defineField({ name: "facebook", title: "Lien Facebook (facultatif)", type: "url", group: "reseaux" }),
+    defineField({ name: "instagram", title: "Lien Instagram (facultatif)", type: "url", group: "reseaux" }),
+  ],
+  preview: { prepare: () => ({ title: "Réglages du site" }) },
+});
+
+export const schemaTypes = [creation, tissu, avis, accueil, reglages];

@@ -1,4 +1,4 @@
-import { whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/settings";
 
 export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -9,10 +9,10 @@ export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) 
 }
 
 /** Bouton flottant visible sur toutes les pages. */
-export function WhatsAppFloat() {
+export function WhatsAppFloat({ number }: { number: string }) {
   return (
     <a
-      href={whatsappLink("Bonjour M2 Dressing, j'aimerais avoir des informations.")}
+      href={whatsappLink(number, "Bonjour M2 Dressing, j'aimerais avoir des informations.")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Discuter sur WhatsApp"

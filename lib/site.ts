@@ -6,6 +6,11 @@
  */
 export const site = {
   name: "M2 Dressing",
+  /**
+   * Adresse du site en ligne (sans « / » final). Sert à Google, au plan du site et aux partages.
+   * À remplacer par le vrai nom de domaine (ou définir la variable SITE_URL sur Cloudflare).
+   */
+  url: (process.env.SITE_URL ?? "https://m2-dressing.pages.dev").replace(/\/$/, ""),
   tagline: "L'élégance et la noblesse. Couture sur mesure à Parakou.",
   description:
     "M2 Dressing, styliste à Parakou (Bénin) : couture sur mesure, tenues de cérémonie, Good Luck, wax, bazin et dentelle. Commandez par WhatsApp.",
@@ -26,17 +31,6 @@ export const site = {
     { image: "/images/stock/hero-aso-oke-vert.jpg", alt: "Agbada en aso-oke vert et blanc", position: "center 10%" },
     { image: "/images/stock/hero-agbada-rouille.jpg", alt: "Agbada rouille brodé ton sur ton", position: "center 32%" },
   ] as { image: string; alt: string; position?: string }[],
-
-  /**
-   * Vidéo affichée juste sous le carrousel (muette, en boucle, démarre seule).
-   * Déposez le fichier dans /public/videos/ : MP4 (H.264), idéalement < 8 Mo, 10 à 20 s.
-   * Tant que le fichier n'existe pas, la section n'apparaît pas.
-   */
-  showcaseVideo: {
-    src: "/videos/hero.mp4",
-    poster: "/images/boubou-brode-taupe.jpg",
-    title: "L'atelier en mouvement",
-  },
 
   tiktok: {
     handle: "@m2dressing",
@@ -77,11 +71,6 @@ export const site = {
 
   currency: "FCFA",
 };
-
-export function whatsappLink(message?: string) {
-  const base = `https://wa.me/${site.whatsapp}`;
-  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
-}
 
 export function formatPrice(n: number) {
   return `${new Intl.NumberFormat("fr-FR").format(n).replace(/\s/g, " ")} ${site.currency}`;

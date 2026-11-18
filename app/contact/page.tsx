@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { TikTokSection } from "@/components/TikTokSection";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
-import { site, whatsappLink } from "@/lib/site";
+import { getSettings } from "@/lib/catalog";
+import { whatsappLink } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Ateliers & Contact",
   description: "Les deux ateliers M2 Dressing à Parakou : adresses, horaires, WhatsApp et TikTok.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const site = await getSettings();
   return (
     <>
       <div className="mx-auto max-w-6xl px-4 pb-12 pt-28">
@@ -22,6 +24,7 @@ export default function ContactPage() {
             <div key={w.name} className="rounded border border-line bg-white p-6">
               <p className="text-lg font-bold uppercase tracking-wider">{w.name}</p>
               <p className="mt-2 text-ink/70">{w.area}</p>
+              {w.address && <p className="text-sm text-ink/70">{w.address}</p>}
               <p className="text-sm text-ink/50">{w.hours}</p>
               <a href={w.mapUrl} target="_blank" rel="noopener noreferrer" className="text-link mt-4 inline-block">
                 Itinéraire
@@ -32,7 +35,7 @@ export default function ContactPage() {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <a
-            href={whatsappLink("Bonjour M2 Dressing, j'aimerais prendre rendez-vous.")}
+            href={whatsappLink(site.whatsapp, "Bonjour M2 Dressing, j'aimerais prendre rendez-vous.")}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-dark"
@@ -44,7 +47,7 @@ export default function ContactPage() {
           </a>
         </div>
       </div>
-      <TikTokSection />
+      <TikTokSection settings={site} />
     </>
   );
 }

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { cartActions } from "@/lib/cart";
 import type { Fabric, Model } from "@/lib/products";
-import { formatPrice, whatsappLink } from "@/lib/site";
+import { formatPrice } from "@/lib/site";
+import { useWhatsApp } from "./SettingsProvider";
 import { Visual } from "./Visual";
 import { WhatsAppIcon } from "./WhatsAppButton";
 
@@ -76,6 +77,7 @@ function Actions({ onAdd, added, waHref, waLabel }: { onAdd: () => void; added: 
 }
 
 export function ModelCard({ model }: { model: Model }) {
+  const whatsappLink = useWhatsApp();
   const [formula, setFormula] = useState<FormulaId>("full");
   const [added, flash] = useAddedFlash();
   const current = formulas.find((f) => f.id === formula)!;
@@ -138,6 +140,7 @@ export function ModelCard({ model }: { model: Model }) {
 }
 
 export function FabricCard({ fabric }: { fabric: Fabric }) {
+  const whatsappLink = useWhatsApp();
   const [qty, setQty] = useState(1);
   const [added, flash] = useAddedFlash();
 

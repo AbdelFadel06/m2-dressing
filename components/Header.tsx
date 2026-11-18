@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
-import { site, whatsappLink } from "@/lib/site";
-// import { SearchDialog } from "./SearchDialog";
+import { site } from "@/lib/site";
+import { useSettings, useWhatsApp } from "./SettingsProvider";
 
 const links = [
   { href: "/", label: "Accueil" },
@@ -20,10 +20,11 @@ const iconBtn =
   "relative flex h-10 w-10 items-center justify-center text-white transition-colors hover:text-[#e3cc85]";
 
 export function Header() {
+  const settings = useSettings();
+  const wa = useWhatsApp();
   const pathname = usePathname();
   const { count } = useCart();
   const [open, setOpen] = useState(false);
-  // const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -68,14 +69,6 @@ export function Header() {
 
           {/* Panier + menu mobile */}
           <div className="flex items-center gap-1">
-            {/* Recherche désactivée pour l'instant : décommenter pour la réactiver
-            <button onClick={() => setSearchOpen(true)} className={iconBtn} aria-label="Rechercher une création ou un tissu">
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="6.5" />
-                <path d="m16 16 4.5 4.5" />
-              </svg>
-            </button>
-            */}
             <Link href="/panier" onClick={() => setOpen(false)} className={iconBtn} aria-label={`Panier, ${count} article${count > 1 ? "s" : ""}`}>
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 8h14l-1.2 12H6.2L5 8Z" />
@@ -131,15 +124,14 @@ export function Header() {
                   </Link>
                 );
               })}
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-4 block text-sm text-white/70 hover:text-white">
-                WhatsApp {site.phoneDisplay}
+              <a href={wa()} target="_blank" rel="noopener noreferrer" className="mt-4 block text-sm text-white/70 hover:text-white">
+                WhatsApp {settings.phoneDisplay}
               </a>
             </nav>
           </div>
         </div>
       </header>
 
-      {/* <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} /> */}
     </>
   );
 }

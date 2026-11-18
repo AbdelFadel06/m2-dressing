@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import type { HeroSlide } from "@/lib/catalog";
-import { site, whatsappLink } from "@/lib/site";
+import { site } from "@/lib/site";
+import { useWhatsApp } from "./SettingsProvider";
 import Link from "next/link";
 import { WhatsAppIcon } from "./WhatsAppButton";
 
@@ -23,6 +24,7 @@ function subscribeReduced(cb: () => void) {
  * Si l'utilisateur a demandé de réduire les animations, seul le zoom est désactivé.
  */
 export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
+  const whatsappLink = useWhatsApp();
   const [index, setIndex] = useState(0);
   const reduced = useSyncExternalStore(
     subscribeReduced,

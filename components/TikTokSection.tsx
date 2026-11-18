@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import type { Settings } from "@/lib/settings";
 import { LoopVideo } from "./LoopVideo";
 
 function TikTokIcon({ className = "h-5 w-5" }: { className?: string }) {
@@ -39,7 +39,7 @@ const frame = "relative mx-auto aspect-[9/16] w-full overflow-hidden rounded bg-
  * Une seule vidéo : presque plein écran sur téléphone (petite marge), centrée sur ordinateur.
  * Ordre de priorité : fichier MP4 (localVideos[0]) > vidéo TikTok (videoIds[0]) > carte vers TikTok.
  */
-export function TikTokSection() {
+export function TikTokSection({ settings: site }: { settings: Settings }) {
   const { localVideos, videoIds, url, handle } = site.tiktok;
   const local = localVideos[0];
   const id = videoIds[0];

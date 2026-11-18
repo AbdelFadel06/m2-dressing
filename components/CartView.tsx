@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { cartActions, useCart } from "@/lib/cart";
-import { formatPrice, site, whatsappLink } from "@/lib/site";
+import { formatPrice } from "@/lib/site";
+import { useSettings, useWhatsApp } from "./SettingsProvider";
 import { Visual } from "./Visual";
 import { WhatsAppIcon } from "./WhatsAppButton";
 
@@ -15,6 +16,8 @@ const deliveryOptions = [
 ];
 
 export function CartView() {
+  const settings = useSettings();
+  const wa = useWhatsApp();
   const { lines, count, total } = useCart();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -49,7 +52,7 @@ export function CartView() {
       )
       .join("\n");
     return [
-      `Bonjour ${site.name} 👋`,
+      `Bonjour ${settings.name} 👋`,
       "Je souhaite passer la commande suivante :",
       "",
       items,
@@ -70,7 +73,7 @@ export function CartView() {
   const send = () => {
     setTouched(true);
     if (!valid) return;
-    window.open(whatsappLink(buildMessage()), "_blank", "noopener,noreferrer");
+    window.open(wa(buildMessage()), "_blank", "noopener,noreferrer");
   };
 
   const input = "mt-1 w-full rounded border border-line bg-white px-3 py-2.5 text-sm";

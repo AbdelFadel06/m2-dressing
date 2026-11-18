@@ -4,12 +4,11 @@ import { FabricCard, ModelCard } from "@/components/Cards";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { Reveal } from "@/components/Reveal";
 import { TikTokSection } from "@/components/TikTokSection";
-import { VideoBand } from "@/components/VideoBand";
 import { Pattern } from "@/components/Visual";
 import { WhatsAppIcon } from "@/components/WhatsAppButton";
-import { getFabrics, getHeroSlides, getModels, getReviews, type Review } from "@/lib/catalog";
+import { getFabrics, getHeroSlides, getModels, getReviews, getSettings, type Review } from "@/lib/catalog";
 import { modelCategories, type PatternKey } from "@/lib/products";
-import { site, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/settings";
 import { slugify } from "@/lib/slug";
 
 /*
@@ -54,7 +53,7 @@ const story = [
   },
 ];
 
-const formulas = [
+const formulas = (whatsapp: string) => [
   {
     name: "Tout compris",
     pitch: "Vous choisissez, on s'occupe de tout.",
@@ -67,7 +66,7 @@ const formulas = [
     pitch: "Vous avez déjà votre pagne ? Ne payez que la couture.",
     points: ["Vous déposez ou envoyez votre tissu", "On vous indique la quantité nécessaire", "La couture sur mesure"],
     cta: "Demander un devis",
-    href: whatsappLink("Bonjour M2 Dressing, j'ai mon tissu et j'aimerais faire coudre une tenue."),
+    href: whatsappLink(whatsapp, "Bonjour M2 Dressing, j'ai mon tissu et j'aimerais faire coudre une tenue."),
   },
 ];
 
@@ -131,14 +130,13 @@ function Reviews({ reviews }: { reviews: Review[] }) {
 }
 
 export default async function Home() {
-  const [models, fabrics, slides, reviews] = await Promise.all([getModels(), getFabrics(), getHeroSlides(), getReviews()]);
+  const [models, fabrics, slides, reviews, site] = await Promise.all([getModels(), getFabrics(), getHeroSlides(), getReviews(), getSettings()]);
   const featuredModels = models.filter((m) => m.tag).slice(0, 4);
   const featuredFabrics = fabrics.filter((f) => f.tag).slice(0, 4);
 
   return (
     <>
       <HeroCarousel slides={slides} />
-      <VideoBand />
 
       {/* 1. PROMESSES */}
       <section className="border-b border-line">
@@ -222,7 +220,7 @@ export default async function Home() {
             <h2 className="section-title mt-2 [&::after]:mx-auto">Nos formules</h2>
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {formulas.map((f, i) => (
+            {formulas(site.whatsapp).map((f, i) => (
               <Reveal key={f.name} delay={i * 120} className="h-full">
                 <div className="flex h-full flex-col rounded border border-white/15 p-7 md:p-9">
                   <p className="text-xl font-bold uppercase tracking-wider">{f.name}</p>
@@ -281,7 +279,7 @@ export default async function Home() {
       {reviews.length > 0 && <Reviews reviews={reviews} />}
 
       {/* 9. VIDÉO */}
-      <TikTokSection />
+      <TikTokSection settings={site} />
 
       {/* 10. CONTACT */}
       <section className="border-b border-white/10 bg-ink text-white">
@@ -296,7 +294,7 @@ export default async function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href={whatsappLink("Bonjour M2 Dressing, j'aimerais des informations.")}
+                href={whatsappLink(site.whatsapp, "Bonjour M2 Dressing, j'aimerais des informations.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn border-[#25D366] bg-[#25D366] text-white hover:bg-transparent"
@@ -311,6 +309,7 @@ export default async function Home() {
               <Reveal as="li" key={w.name} delay={i * 120} className="rounded border border-white/15 p-6">
                 <p className="font-bold uppercase tracking-wider">{w.name}</p>
                 <p className="mt-1 text-white/70">{w.area}</p>
+                {w.address && <p className="text-sm text-white/70">{w.address}</p>}
                 <p className="mt-1 text-sm text-white/50">{w.hours}</p>
                 <a href={w.mapUrl} target="_blank" rel="noopener noreferrer" className="text-link mt-4 inline-block text-white">
                   Itinéraire
