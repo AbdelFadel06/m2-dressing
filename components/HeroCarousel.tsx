@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import type { HeroSlide } from "@/lib/catalog";
-import { site } from "@/lib/site";
+import { site, whatsappLink } from "@/lib/site";
+import Link from "next/link";
+import { WhatsAppIcon } from "./WhatsAppButton";
 
 const DURATION = 5000; // ms par image
 
@@ -65,19 +67,33 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       ))}
 
       {/* voile en bas pour que le texte et les points restent lisibles */}
-      <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-black/85 via-black/45 to-transparent md:h-[60%] md:from-black/75 md:via-black/30" />
 
-      <div className="absolute inset-x-0 bottom-20 px-6 text-center text-white">
+      <div className="absolute inset-x-0 bottom-16 px-6 text-center text-white">
         <p className="mx-auto max-w-6xl text-[clamp(1.9rem,4.6vw,4rem)] font-extrabold uppercase leading-[1.05] tracking-[0.02em]">
           Sur mesure, <span className="text-gold-metal">sans attendre</span>
         </p>
         <p className="mx-auto mt-4 max-w-2xl text-base text-white/85 md:text-xl">
           Vos tenues confectionnées à vos mesures, dans des tissus de qualité, prêtes en un temps record.
         </p>
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
+          <Link href="/creations" className="btn btn-light">Voir nos créations</Link>
+          {/* sur téléphone, le bouton WhatsApp flottant fait déjà ce travail */}
+          <span className="hidden sm:block">
+            <a
+              href={whatsappLink("Bonjour M2 Dressing, j'aimerais commander une tenue sur mesure.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-ghost-light"
+            >
+              <WhatsAppIcon className="h-4 w-4" /> Commander
+            </a>
+          </span>
+        </div>
       </div>
 
       {slides.length > 1 && (
-        <div className="absolute inset-x-0 bottom-8 flex items-center justify-center gap-3">
+        <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-3">
           <div className="flex items-center gap-1" role="tablist" aria-label="Choisir une image">
             {slides.map((s, i) => (
               <button

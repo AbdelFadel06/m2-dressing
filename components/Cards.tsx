@@ -99,7 +99,7 @@ export function ModelCard({ model }: { model: Model }) {
         <h3 className={ui.title} title={model.name}>{model.name}</h3>
         <p className={`${ui.detail} hidden md:block`}>{model.description}</p>
         <p className={ui.price}>
-          <span className="text-ink/50">À partir de </span>
+          <span className="text-ink/50"><span className="sm:hidden">Dès </span><span className="hidden sm:inline">À partir de </span></span>
           <span className="font-bold">{formatPrice(model.price)}</span>
         </p>
 

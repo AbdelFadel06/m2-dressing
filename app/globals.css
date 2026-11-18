@@ -14,7 +14,9 @@
 
   --color-cream: #ffffff;
   --color-sand: #ffffff;
-  --color-gold: #0d0d0d;
+  /* Or du logo : couleur d'accent (petits traits, numéros, étiquettes) */
+  --color-gold: #b8913f;
+  --color-gold-soft: #f7f1e3;
   --color-terra: #0d0d0d;
   --color-indigo: #0d0d0d;
 
@@ -51,7 +53,31 @@ body {
   width: 48px;
   height: 2px;
   margin-top: 0.6rem;
-  background: currentColor;
+  background: var(--color-gold);
+}
+
+/* Petit sur-titre doré au-dessus des titres de section */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Apparition au défilement (composant <Reveal>) */
+.reveal {
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal[data-reveal="out"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+@media (prefers-reduced-motion: reduce) {
+  /* fondu seul, sans mouvement */
+  .reveal[data-reveal="out"] {
+    transform: none;
+  }
 }
 
 /* Lien texte souligné */

@@ -132,4 +132,32 @@ export const accueil = defineType({
   preview: { prepare: () => ({ title: "Page d'accueil" }) },
 });
 
-export const schemaTypes = [creation, tissu, accueil];
+export const avis = defineType({
+  name: "avis",
+  title: "Avis client",
+  type: "document",
+  fields: [
+    defineField({ name: "prenom", title: "Prénom du client", type: "string", validation: (r) => r.required() }),
+    defineField({ name: "ville", title: "Ville", type: "string", initialValue: "Parakou" }),
+    defineField({ name: "tenue", title: "Tenue commandée", description: "Ex : Agbada pour un mariage", type: "string" }),
+    defineField({
+      name: "texte",
+      title: "Avis",
+      description: "Recopiez le message du client tel quel (avec son accord).",
+      type: "text",
+      rows: 4,
+      validation: (r) => r.required().max(400),
+    }),
+    defineField({ name: "photo", title: "Photo du client habillé (facultatif)", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "note",
+      title: "Note sur 5",
+      type: "number",
+      initialValue: 5,
+      options: { list: [5, 4, 3, 2, 1], layout: "radio", direction: "horizontal" },
+    }),
+  ],
+  preview: { select: { title: "prenom", subtitle: "texte", media: "photo" } },
+});
+
+export const schemaTypes = [creation, tissu, avis, accueil];

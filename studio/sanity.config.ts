@@ -38,6 +38,7 @@ export default defineConfig({
             S.divider(),
             S.documentTypeListItem("creation").title("Nos créations"),
             S.documentTypeListItem("tissu").title("Pagnes & tissus"),
+            S.documentTypeListItem("avis").title("Avis clients"),
           ]),
     }),
   ],

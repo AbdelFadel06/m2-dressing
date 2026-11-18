@@ -74,3 +74,16 @@ export async function getHeroSlides(): Promise<HeroSlide[]> {
     },
   );
 }
+
+export type Review = { id: string; name: string; city?: string; outfit?: string; text: string; rating: number; image?: string; position?: string };
+
+/** Avis clients : uniquement ceux saisis dans Sanity (aucun avis d'exemple). */
+export async function getReviews(): Promise<Review[]> {
+  return fetchOr(
+    `*[_type == "avis" && defined(texte)] | order(_createdAt desc) {
+      "id": _id, "name": prenom, "city": ville, "outfit": tenue, "text": texte, "rating": coalesce(note, 5), photo
+    }`,
+    [],
+    ({ photo: p, ...r }: Review & { photo?: SanityImage }): Review => ({ ...r, ...photo(p) }),
+  );
+}
