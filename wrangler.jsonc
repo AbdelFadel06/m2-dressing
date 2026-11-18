@@ -1,0 +1,12 @@
+// Hébergement Cloudflare (Workers, fichiers statiques).
+// `npm run build` génère le site dans out/, puis `npx wrangler deploy` envoie ce dossier.
+{
+  "name": "m2-dressing",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./out",
+    // /creations sert creations.html ; une adresse inconnue affiche la page 404 « Fil perdu »
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
