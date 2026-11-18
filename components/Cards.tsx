@@ -110,7 +110,8 @@ export function ModelCard({ model }: { model: Model }) {
         <p className={`${ui.price} font-bold`} aria-live="polite">{formatPrice(price)}</p>
 
         <div className={ui.bottom}>
-          <div className={`${ui.control} grid grid-cols-2 p-0.5`} role="radiogroup" aria-label="Formule">
+          {/* le bouton actif prend la place nécessaire à son libellé complet, l'autre se réduit (et s'abrège si besoin) */}
+          <div className={`${ui.control} flex p-0.5`} role="radiogroup" aria-label="Formule">
             {formulas.map((f) => (
               <button
                 key={f.id}
@@ -119,8 +120,10 @@ export function ModelCard({ model }: { model: Model }) {
                 aria-checked={formula === f.id}
                 title={f.hint}
                 onClick={() => setFormula(f.id)}
-                className={`truncate px-1 text-xs font-semibold transition-colors ${
-                  formula === f.id ? "bg-ink text-white" : "text-ink/60 hover:text-ink"
+                className={`whitespace-nowrap text-xs font-semibold transition-colors ${
+                  formula === f.id
+                    ? "flex-none bg-ink px-2.5 text-white"
+                    : "min-w-0 flex-1 truncate px-1.5 text-ink/60 hover:text-ink"
                 }`}
               >
                 {f.label}
