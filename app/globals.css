@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
 /*
- * Palette noir & blanc.
+ * Palette « terre et or » : chocolat à la place du noir, fond blanc, or du logo.
+ * (Ancienne palette noir & blanc : branche git `main`.)
  * Les anciens noms (cream, sand, gold, terra, indigo) sont gardés comme alias
  * pour pouvoir réintroduire une couleur de marque plus tard en un seul endroit.
  */
 @theme inline {
-  --color-ink: #0d0d0d;
-  --color-ink-soft: #2a2a2a;
+  --color-ink: #5a2e1e; /* chocolat : texte, boutons, fonds sombres */
+  --color-ink-soft: #7a4a36;
+  --color-ink-deep: #2b150d; /* voile sombre sur les photos */
   --color-paper: #ffffff;
   --color-mist: #ffffff;
-  --color-line: #e6e6e6;
+  --color-line: #ecdfd2;
 
   --color-cream: #ffffff;
   --color-sand: #ffffff;
   /* Or du logo : couleur d'accent (petits traits, numéros, étiquettes) */
-  --color-gold: #b8913f;
-  --color-gold-soft: #f7f1e3;
-  --color-terra: #0d0d0d;
+  --color-gold: #a67c3d; /* or foncé, lisible sur fond blanc */
+  --color-gold-bright: #d8b45f; /* or clair, sur fonds chocolat */
+  --color-gold-soft: #f3eadf; /* sable clair */
+  --color-terra: #b5532e; /* terracotta : étiquettes, survols */
   --color-indigo: #0d0d0d;
 
   --font-sans: "DM Sans Variable", system-ui, sans-serif;
@@ -63,6 +66,14 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-gold);
+}
+
+/* Sur les fonds chocolat, l'or clair ressort mieux que l'or foncé */
+.bg-ink .eyebrow {
+  color: #d8b45f;
+}
+.bg-ink .section-title::after {
+  background: #d8b45f;
 }
 
 /* Apparition au défilement (composant <Reveal>) */
@@ -152,7 +163,7 @@ body {
   transition: box-shadow 0.15s, transform 0.15s;
 }
 .product-card:hover {
-  box-shadow: 0 10px 26px rgb(0 0 0 / 0.12);
+  box-shadow: 0 10px 26px rgb(90 46 30 / 0.16);
   transform: translateY(-2px);
 }
 

@@ -67,7 +67,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       ))}
 
       {/* voile en bas pour que le texte et les points restent lisibles */}
-      <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-black/85 via-black/45 to-transparent md:h-[60%] md:from-black/75 md:via-black/30" />
+      <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-ink-deep/85 via-ink-deep/45 to-transparent md:h-[60%] md:from-ink-deep/75 md:via-ink-deep/30" />
 
       <div className="absolute inset-x-0 bottom-16 px-6 text-center text-white">
         <p className="mx-auto max-w-6xl text-[clamp(1.9rem,4.6vw,4rem)] font-extrabold uppercase leading-[1.05] tracking-[0.02em]">
